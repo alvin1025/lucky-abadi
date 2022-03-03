@@ -9,7 +9,13 @@
             <div class="col-md-8">
                 <h1 class="mb-5">{{ $post->title}}</h1>
                 <small><p>By. <a href="/post?author={{ $post->author->username }}" class="text-decoration-none">{{ $post->author->name }}</a> in <a href="/post?category={{ $post->category->slug }}" class="text-decoration-none">{{ $post->category->name }} </a>  </p></small>
-                <img src="https://source.unsplash.com/random/1200x400?{{ $post->category->name }}" alt="{{ $post->category->name }}" class="img-fluid">
+                @if ($post->image)
+                <div style="max-height: 300px; overflow:hidden">
+                    <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->category->name }}" class="img-fluid">
+                </div>
+                @else
+                    <img src="https://source.unsplash.com/random/1200x400?{{ $post->category->name }}" alt="{{ $post->category->name }}" class="img-fluid">
+                @endif
                 
                 <article class="my-3">
                     {!! $post->body !!}
